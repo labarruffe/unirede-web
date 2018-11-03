@@ -26,20 +26,28 @@ export class UserService {
 
 /** GET users from the server */
 getUsers (): Observable<User[]> {
-  return this.http.get<User[]>(this.base_url + this.users_endpoint)
-    .pipe(
-      catchError(this.handleError('getUsers', []))
-    );
+  return this.http.get<User[]>(this.base_url + this.users_endpoint).pipe(
+    catchError(this.handleError('getUsers', []))
+  );
 }
 
 /**
    * POST: create a new user to the server
   */
  createUser(user: User): Observable<User> {
-  return this.http.post<User>(this.base_url + this.users_endpoint, user, httpOptions)
-    .pipe(
-      catchError(this.handleError<User>('createUser'))
-    );
+  return this.http.post<User>(this.base_url + this.users_endpoint, user, httpOptions).pipe(
+    catchError(this.handleError<User>('createUser'))
+  );
+}
+
+/** DELETE: delete the user from the server */
+  deleteUser (user: User | number): Observable<User> {
+  const id = typeof user === 'number' ? user : user.id;
+  const url = `${this.base_url + this.users_endpoint}/${id}`;
+
+  return this.http.delete<User>(url, httpOptions).pipe(
+    catchError(this.handleError<User>('deleteUser'))
+  );
 }
 
   /**

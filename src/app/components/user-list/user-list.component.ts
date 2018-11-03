@@ -22,4 +22,9 @@ export class UserListComponent implements OnInit {
     this.userService.getUsers().subscribe(
       result => this.users = result);
   }
+
+  deleteUser(user: User): void {
+    this.users = this.users.filter(u => u !== user);
+    this.userService.deleteUser(user).subscribe();
+  }
 }
