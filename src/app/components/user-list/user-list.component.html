@@ -1,0 +1,7 @@
+<button type="button" class="btn btn-sm btn-outline-secondary" [routerLink]="['/admin/usuarios/criar']">Criar</button>
+<div *ngFor="let user of users">
+  <p>Login: {{user?.login}}</p>
+  <p>Nível de permissão: {{user?.access_level}}</p>
+  <button type="button" class="btn btn-sm btn-outline-secondary" [routerLink]="['/usuario/editar']">Editar</button>
+  <button type="button" class="btn btn-sm btn-outline-secondary" [routerLink]="">Excluir</button>
+</div>
