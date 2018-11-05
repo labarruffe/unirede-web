@@ -4,7 +4,7 @@
   <p>Login: {{user?.login}}</p>
   <p>Nível de permissão: {{user?.access_level}}</p>
   <button type="button" [routerLink]="['/admin/usuarios/usuario']"
-  [queryParams]="{ action: 'editar', id: user.id }">Editar</button>
+  [queryParams]="{ action: 'editar', id: user._id }">Editar</button>
   <button type="button" routerLink=""
   (click)="deleteUser(user._id)">Excluir</button>
 </div>

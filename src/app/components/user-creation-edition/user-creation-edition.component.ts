@@ -14,6 +14,7 @@ export class UserCreationEditionComponent implements OnInit {
 
   users: User[];
   user: User;
+  user_id = '';
   access_level_select: string;
   access_levels = {};
 
@@ -42,7 +43,8 @@ export class UserCreationEditionComponent implements OnInit {
     this.route.queryParams.subscribe(params => {
       if (params.action === 'editar') {
         if (params.id) {
-          this.userService.getUser(params.id).subscribe(
+          this.user_id = params.id;
+          this.userService.getUser(this.user_id).subscribe(
             user => this.user = user
             );
         } else {
@@ -57,7 +59,7 @@ export class UserCreationEditionComponent implements OnInit {
   }
 
   updateUser(): void {
-    this.userService.updateUser(this.user).subscribe(
+    this.userService.updateUser(this.user_id, this.user).subscribe(
       () => this.goBack());
   }
 }

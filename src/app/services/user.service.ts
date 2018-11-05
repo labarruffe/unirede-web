@@ -31,7 +31,7 @@ export class UserService {
 
   /** GET user by id. Will 404 if id not found */
   getUser(id: string | number): Observable<User> {
-    const url = `${this.base_url} /user/ ${id}`;
+    const url = `${this.base_url}/user/${id}`;
     return this.http.get<User>(url).pipe(
       catchError(this.handleError<User>(`getUser id=${id}`))
     );
@@ -55,8 +55,8 @@ export class UserService {
   }
 
   /** PATCH: update the user on the server */
-  updateUser (user: User): Observable<any> {
-    return this.http.put(this.base_url + '/user', user, httpOptions).pipe(
+  updateUser (id: string, user: User): Observable<any> {
+    return this.http.patch(`${this.base_url}/user/${id}`, user, httpOptions).pipe(
       catchError(this.handleError<any>('updateUser'))
     );
   }
