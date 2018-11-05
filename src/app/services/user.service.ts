@@ -24,31 +24,46 @@ export class UserService {
     private http: HttpClient) { }
 
 
-/** GET users from the server */
-getUsers (): Observable<User[]> {
-  return this.http.get<User[]>(this.base_url + this.users_endpoint).pipe(
-    catchError(this.handleError('getUsers', []))
-  );
-}
+  /** GET users from the server */
+  getUsers (): Observable<User[]> {
+    return this.http.get<User[]>(this.base_url + this.users_endpoint).pipe(
+      catchError(this.handleError('getUsers', []))
+    );
+  }
 
-/**
+  /** GET user by id. Will 404 if id not found */
+  getUser(id: string | number): Observable<User> {
+    const url = `${this.base_url + this.users_endpoint}/${id}`;
+    return this.http.get<User>(url).pipe(
+      catchError(this.handleError<User>(`getUser id=${id}`))
+    );
+  }
+
+  /**
    * POST: create a new user to the server
   */
- createUser(user: User): Observable<User> {
-  return this.http.post<User>(this.base_url + this.users_endpoint, user, httpOptions).pipe(
-    catchError(this.handleError<User>('createUser'))
-  );
-}
+  createUser(user: User): Observable<User> {
+    return this.http.post<User>(this.base_url + this.users_endpoint, user, httpOptions).pipe(
+      catchError(this.handleError<User>('createUser'))
+    );
+  }
 
-/** DELETE: delete the user from the server */
+  /** DELETE: delete the user from the server */
   deleteUser (user: User | number): Observable<User> {
-  const id = typeof user === 'number' ? user : user.id;
-  const url = `${this.base_url + this.users_endpoint}/${id}`;
+    const id = typeof user === 'number' ? user : user.id;
+    const url = `${this.base_url + this.users_endpoint}/${id}`;
 
-  return this.http.delete<User>(url, httpOptions).pipe(
-    catchError(this.handleError<User>('deleteUser'))
-  );
-}
+    return this.http.delete<User>(url, httpOptions).pipe(
+      catchError(this.handleError<User>('deleteUser'))
+    );
+  }
+
+  /** PATCH: update the user on the server */
+  updateUser (user: User): Observable<any> {
+    return this.http.put(this.base_url + this.users_endpoint, user, httpOptions).pipe(
+      catchError(this.handleError<any>('updateUser'))
+    );
+  }
 
   /**
    * Handle Http operation that failed.
@@ -66,6 +81,5 @@ getUsers (): Observable<User[]> {
       // Let the app keep running by returning an empty result.
       return of(result as T);
     };
-
   }
 }

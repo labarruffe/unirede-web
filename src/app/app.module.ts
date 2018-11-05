@@ -8,14 +8,14 @@ import { UserListComponent } from './components/user-list/user-list.component';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemoryDataService } from './services/in-memory-data.service';
-import { UserCreationComponent } from './components/user-creation/user-creation.component';
 import { FormsModule } from '@angular/forms';
+import { UserCreationEditionComponent } from './components/user-creation-edition/user-creation-edition.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     UserListComponent,
-    UserCreationComponent,
+    UserCreationEditionComponent,
   ],
   imports: [
     BrowserModule,

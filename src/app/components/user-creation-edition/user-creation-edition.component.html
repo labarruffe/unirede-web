@@ -1,0 +1,63 @@
+<div *ngIf="user">
+  <h2>Editar Usuário</h2>
+
+  <label>Usuário:</label>
+  <br><input [(ngModel)]="user.login" name="user.login.value">
+
+  <br><br>
+
+  <label>Senha:</label>
+  <br><input [(ngModel)]="user.password" type="password" name="user.password.value">
+
+  <br><br>
+
+  <label>Nível de acesso:</label>
+  <br>
+  <select [(ngModel)]="user.access_level" id="access_level" name="access_level.name" required>
+    <ng-container *ngFor="let access_level of access_levels">
+      <option *ngIf="'user.access_level' != access_level.name" [ngValue]="access_level.name">
+        {{access_level.name}}
+      </option>
+    </ng-container>
+  </select>
+
+  <br><br>
+
+  <button (click)="updateUser()">Salvar</button>
+  <br>
+  <button (click)="goBack()">Voltar</button>
+</div>
+
+<div *ngIf="!user">
+    <h2 >Criar Usuário</h2>
+
+    <form action="">
+        <label>Usuário:</label>
+        <br><input #login type="text" placeholder="" value="" id="login" required>
+
+        <br><br>
+
+        <label for="password_input">Senha:</label>
+        <br><input #password type="password" placeholder="" value="" id="password" required>
+
+        <br><br>
+
+        <label>Nível de acesso:</label>
+        <br><select [(ngModel)]="access_level_select" id="access_level" name="access_level.name" required>
+          <option value="undefined" hidden>-- Escolha uma opção --</option>
+          <option *ngFor="let access_level of access_levels" [ngValue]="access_level.name">
+            {{access_level.name}}
+          </option>
+        </select>
+        <br><br>
+
+        <button type="submit" (click)="createUser(login.value, password.value, access_level_select)">Criar</button>
+        <br>
+        <button (click)="goBack()">Voltar</button>
+
+    </form>
+
+</div>
+
+
+
