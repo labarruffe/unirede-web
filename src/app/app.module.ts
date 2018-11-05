@@ -6,8 +6,6 @@ import { AppComponent } from './app.component';
 import { UserListComponent } from './components/user-list/user-list.component';
 
 import { HttpClientModule } from '@angular/common/http';
-import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
-import { InMemoryDataService } from './services/in-memory-data.service';
 import { FormsModule } from '@angular/forms';
 import { UserCreationEditionComponent } from './components/user-creation-edition/user-creation-edition.component';
 
@@ -26,9 +24,10 @@ import { UserCreationEditionComponent } from './components/user-creation-edition
   // The HttpClientInMemoryWebApiModule module intercepts HTTP requests
   // and returns simulated server responses.
   // Remove it when a real server is ready to receive requests.
-  HttpClientInMemoryWebApiModule.forRoot(
-    InMemoryDataService, { dataEncapsulation: false }
-)
+
+  // HttpClientInMemoryWebApiModule.forRoot(
+  //   InMemoryDataService, { dataEncapsulation: false }
+  // )
 
   ],
   providers: [],
