@@ -1,10 +1,33 @@
-<button type="button" [routerLink]="['/admin/usuarios/usuario']"
-[queryParams]="{ action: 'cadastrar' }">Criar</button>
-<div *ngFor="let user of users">
-  <p>Login: {{user?.login}}</p>
-  <p>Nível de permissão: {{user?.access_level}}</p>
-  <button type="button" [routerLink]="['/admin/usuarios/usuario']"
-  [queryParams]="{ action: 'editar', id: user._id }">Editar</button>
-  <button type="button" routerLink=""
-  (click)="deleteUser(user._id)">Excluir</button>
+<div class="container">
+  <div class="row">
+      <div class="col s12 m3 l3"></div>
+      <div class="col s12 m6 l6">
+      <div class="card horizontal">
+        <div class="card-stacked">
+          <div class="card-content">
+              <button class="waves-effect waves-light btn gradient-45deg-red-pink"
+              type="button" [routerLink]="['/admin/usuarios/usuario']"
+              [queryParams]="{ action: 'cadastrar' }">
+                Criar
+              </button>
+          </div>
+        </div>
+      </div>
+      <div class="card horizontal" *ngFor="let user of users">
+        <div class="card-stacked">
+          <div class="card-content">
+              <p>Login: {{user?.login}}</p>
+              <p>Nível de permissão: {{user?.access_level}}</p>
+          </div>
+          <div class="card-action">
+              <button class="waves-effect waves-light btn gradient-45deg-red-pink" type="button" [routerLink]="['/admin/usuarios/usuario']"
+              [queryParams]="{ action: 'editar', id: user._id }">Editar</button>
+              <button class="waves-effect waves-light btn gradient-45deg-red-pink" type="button"
+              (click)="deleteUser(user._id)">Excluir</button>
+          </div>
+        </div>
+      </div>
+      </div>
+      <div class="col s12 m3 l3"></div>
+  </div>
 </div>
