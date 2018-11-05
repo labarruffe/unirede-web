@@ -36,8 +36,7 @@ export class UserCreationEditionComponent implements OnInit {
   createUser(login: string, password: string, access_level: string): void {
     this.userService.createUser({ login, password, access_level } as User).subscribe(
       user => this.users.push(user));
-      this.goBack();
-  }
+    }
 
   getUser(): void {
     this.route.queryParams.subscribe(params => {

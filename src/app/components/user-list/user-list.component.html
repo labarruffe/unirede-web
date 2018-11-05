@@ -6,5 +6,5 @@
   <button type="button" [routerLink]="['/admin/usuarios/usuario']"
   [queryParams]="{ action: 'editar', id: user.id }">Editar</button>
   <button type="button" routerLink=""
-  (click)="deleteUser(user)">Excluir</button>
+  (click)="deleteUser(user._id)">Excluir</button>
 </div>

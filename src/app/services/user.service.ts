@@ -15,10 +15,8 @@ const httpOptions = {
 })
 export class UserService {
 
-  // private base_url = 'http://localhost:3000/admin/api/';
-  private base_url = 'api/';
-
-  private users_endpoint = 'users';
+  private base_url = 'http://localhost:3000/unirededb';
+  // private base_url = 'api/';
 
   constructor(
     private http: HttpClient) { }
@@ -26,14 +24,14 @@ export class UserService {
 
   /** GET users from the server */
   getUsers (): Observable<User[]> {
-    return this.http.get<User[]>(this.base_url + this.users_endpoint).pipe(
+    return this.http.get<User[]>(this.base_url + '/users').pipe(
       catchError(this.handleError('getUsers', []))
     );
   }
 
   /** GET user by id. Will 404 if id not found */
   getUser(id: string | number): Observable<User> {
-    const url = `${this.base_url + this.users_endpoint}/${id}`;
+    const url = `${this.base_url} /user/ ${id}`;
     return this.http.get<User>(url).pipe(
       catchError(this.handleError<User>(`getUser id=${id}`))
     );
@@ -43,24 +41,22 @@ export class UserService {
    * POST: create a new user to the server
   */
   createUser(user: User): Observable<User> {
-    return this.http.post<User>(this.base_url + this.users_endpoint, user, httpOptions).pipe(
+    return this.http.post<User>(this.base_url + '/user', user, httpOptions).pipe(
       catchError(this.handleError<User>('createUser'))
     );
   }
 
   /** DELETE: delete the user from the server */
-  deleteUser (user: User | number): Observable<User> {
-    const id = typeof user === 'number' ? user : user.id;
-    const url = `${this.base_url + this.users_endpoint}/${id}`;
-
-    return this.http.delete<User>(url, httpOptions).pipe(
-      catchError(this.handleError<User>('deleteUser'))
+  deleteUser (id: string): Observable<User[]> {
+    const url = `${this.base_url}/user/${id}`;
+    return this.http.delete<User[]>(url).pipe(
+      catchError(this.handleError<User[]>(`deleteUser id=${id}`))
     );
   }
 
   /** PATCH: update the user on the server */
   updateUser (user: User): Observable<any> {
-    return this.http.put(this.base_url + this.users_endpoint, user, httpOptions).pipe(
+    return this.http.put(this.base_url + '/user', user, httpOptions).pipe(
       catchError(this.handleError<any>('updateUser'))
     );
   }
